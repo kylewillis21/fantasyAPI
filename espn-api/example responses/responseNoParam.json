@@ -1,0 +1,97 @@
+{
+  "gameId": 1,
+  "id": 946854126,
+  "members": [
+    {
+      "displayName": "espnfan3404382684",
+      "id": "{54742A0F-338F-445E-BBA8-B2A89C8669E0}",
+      "isLeagueManager": false
+    },
+    {
+      "displayName": "ESPNfan1028789913",
+      "id": "{57EE6D32-5379-480F-806D-DB96E7450B56}",
+      "isLeagueManager": false
+    },
+    {
+      "displayName": "Tucktuck2334",
+      "id": "{657AE326-C62D-41C1-BAE3-26C62D21C131}",
+      "isLeagueManager": false
+    },
+    {
+      "displayName": "ESPNFAN5167784175",
+      "id": "{71E493A6-4323-4931-B73F-F739026B54C3}",
+      "isLeagueManager": false
+    },
+    {
+      "displayName": "CAW3354",
+      "id": "{76E8AA9E-66C1-4806-A8AA-9E66C1180676}",
+      "isLeagueManager": false
+    },
+    {
+      "displayName": "espn70759335",
+      "id": "{9E979BD4-7799-45D3-979B-D47799F5D385}",
+      "isLeagueManager": false
+    },
+    {
+      "displayName": "espn43484233",
+      "id": "{A43D1C96-A3CB-4F3F-8F79-14416ABB3791}",
+      "isLeagueManager": false
+    },
+    {
+      "displayName": "espn89224548",
+      "id": "{C3E0D1C7-A664-4EBE-95EE-414A1951A3B0}",
+      "isLeagueManager": false
+    }
+  ],
+  "scoringPeriodId": 19,
+  "seasonId": 2022,
+  "segmentId": 0,
+  "settings": { "name": "the boys" },
+  "status": {
+    "currentMatchupPeriod": 16,
+    "isActive": true,
+    "latestScoringPeriod": 19
+  },
+  "teams": [
+    {
+      "abbrev": "darn",
+      "id": 1,
+      "owners": ["{9E979BD4-7799-45D3-979B-D47799F5D385}"]
+    },
+    {
+      "abbrev": "EASy",
+      "id": 2,
+      "owners": ["{57EE6D32-5379-480F-806D-DB96E7450B56}"]
+    },
+    {
+      "abbrev": "YUh",
+      "id": 7,
+      "owners": ["{A43D1C96-A3CB-4F3F-8F79-14416ABB3791}"]
+    },
+    {
+      "abbrev": "SOv",
+      "id": 10,
+      "owners": ["{71E493A6-4323-4931-B73F-F739026B54C3}"]
+    },
+    {
+      "abbrev": "Coke",
+      "id": 11,
+      "owners": ["{C3E0D1C7-A664-4EBE-95EE-414A1951A3B0}"]
+    },
+    {
+      "abbrev": "PEG",
+      "id": 12,
+      "owners": ["{76E8AA9E-66C1-4806-A8AA-9E66C1180676}"]
+    },
+    {
+      "abbrev": "PLSR",
+      "id": 13,
+      "owners": ["{54742A0F-338F-445E-BBA8-B2A89C8669E0}"]
+    },
+    {
+      "abbrev": "LGB",
+      "id": 14,
+      "owners": ["{657AE326-C62D-41C1-BAE3-26C62D21C131}"]
+    }
+  ]
+}

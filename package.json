@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "The api for the website",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node ./espn-api/tests/requests.tests.js",
+    "start": "node index.js"
+  },
+  "author": "Kyle Willis <kylew920@outlook.com>",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
