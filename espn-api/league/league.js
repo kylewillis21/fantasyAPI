@@ -1,6 +1,7 @@
 import { EspnRequests } from "../requests.js";
 import { Team } from "../team/team.js";
 import { Pick } from "../pick/pick.js";
+import { Settings } from "../settings/settings.js";
 
 export class League {
   constructor(leagueId, year) {
@@ -44,7 +45,7 @@ export class League {
           : data["status"]["finalScoringPeriod"];
     }
     this.members = data?.members ?? [];
-    this.settings = data?.settings ?? {};
+    this.settings = new Settings(data?.settings);
 
     return data;
   }
