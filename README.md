@@ -112,15 +112,63 @@ A class representing any given year of a leauge and the teams of that league
 | **members** | Array(Object) | An array of all the members of the league and their info |
 | **draft** | Array(Pick) | An array of all the picks made in the draft of this league ([See pick](#pick)) |
 | **playerMap** | Object | An object of all the players full names mapped to their unique identifier |
-| **requests** | EspnRequests | Made up of EspnRequest class, it is used to make all of the calls to ESPN and pull data ([see requests](#EspnRequest)) |
+| **requests** | EspnRequests | Made up of EspnRequest class, it is used to make all of the calls to ESPN and pull data ([see requests](#espnrequests)) |
 | **currentMatchupPeriod** | Int | The id of the current matchup period, typically week 1 = 1, etc... |
 | **scoringPeriodId** | Int | The id of the scoring period, this can vary from currentMatchupPeriod if leagues have matches that last multiple weeks |
 | **firstScoringPeriod** | Int | The first scoring period of the season, typically will always be 1 |
 | **finalScoringPeriod** | Int | The final scoring period of the season |
 | **previousSeasons** | Array(Int) | An array of previous seasons if this is not this leagues first season |
 | **currentWeek** | Int | The current week of the NFL season |
-| **settings** | Settings | The saved scoring settings of a given league ([See settings](#Settings))|
+| **settings** | Settings | The saved scoring settings of a given league ([See settings](#settings))|
 
+| Methods  | Parameters | Return Type | Description |
+| -------- | ---------- | ----------- | ----------- |
+| **toString** | None | String | Returns a string with the format 'League({leagueId}, {year})' |
+| **getTeamData** | (Int) teamId | Team | Returns the team that matches the teamId |
+| *async* **fetchLeague** | None | Object | Updates the league with the most recent data, returns the data object that it uses |
+| *async* **fetchTeams** | (object) Data | None | Updates all of the teams based on the data passed through the function. Typically this data is the one returned from fetchLeague |
+| *async* **fetchDraft** | None | None | Updates the leagues draft with all the picks |
+| *async* **fetchPlayers** | None | None | Maps all of the professional players to their unique IDs |
+
+ 
 ## EspnRequests
 
+A class that allows for all of the needed requests to ESPN to pull data from
+
+| Variables | Type | Description |
+|-----------|------|-------------|
+| **leagueId** | Int | The unique identifier of the ESPN fantasy league to pull data from |
+| **year** | Int | The year from which to request data from |
+| **endpoint** | String | A constant used when making requests |
+
+| Methods  | Parameters | Return Type | Description |
+| -------- | ---------- | ----------- | ----------- |
+| *async* **#getLeauge** | (String) params, (bool) extend, (String) extension | JSON | The base function to make all requests to the espn server. Never called directly outside of class functions. |
+| *async* **getAll** | None | JSON | Requests a JSON of all the information needed for this API |
+| *async* **getDraft** | None | JSON | Requests a JSON of the draft information from ESPN servers |
+| *async* **getRoster** | None | JSON | Requests a JSON of the roster information for each team |
+| *async* **getPlayer** | None | JSON | Requests a JSON of all the members of the league and their team information |
+| *async* **getProPlayers** | None | JSON | requests a JSON of all the professional players to help for better mapping |
+
 ## Settings
+
+The scoring settings for the league along with some other settings for acquisitions and trades
+
+| Variables | Type | Description |
+|-----------|------|-------------|
+| **regSeasonCount** | Int | Number of matchup periods there are in the season |
+| **matchupPeriods** | Object | A mapping of matchup periods and their corresponding scoring periods. One matchup period can have multiple scoring periods if the matchup lasts longer than a week | 
+| **vetoVotesRequired** | Int | Number of votes required in the league to veto a trade |
+| **teamCount** | Int | The number of teams in the league |
+| **playoffTeamCount** | Int | The number of teams that make the playoffs |
+| **keeperCount** | Int | The number of players a manager can mark as a keeper |
+| **tradeDeadline** | Int | |
+| **divisionMap** | Object | An object that maps out division names to their respective ID |
+| **name** | String | The name of the league |
+| **tieRule** | String | The rule used in case of tie |
+| **playoffTieRule** | String | The rule used in case of tie in playoffs |
+| **playoffMatchupPeriodLength** | Int | How long each matchup period lasts in the playoffs |
+| **playoffSeedTieRule** | String | The rule used in case of a playoff seeding tie |
+| **faab** | bool | |
+| **scoringFormat** | Array(Object) | An array of objects containing rules for scoring |
+| **positionSlotCounts** | Object | Contains how many of each position a player can play at a time |
