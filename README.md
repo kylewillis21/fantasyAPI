@@ -15,7 +15,7 @@ It will be linked here when it is deployed.
 
 ## Documentation
 
-### Player
+## Player
 
 This class stores an individual player
 
@@ -45,7 +45,7 @@ Member functions of the Player class
 | -------- | ---------- | ----------- | ----------- |
 | **toString** | None | String | Returns a string with the format 'Player($name)' |
 
-### Pick
+## Pick
 
 This class stores an individual pick of a draft
 
@@ -60,7 +60,7 @@ This class stores an individual pick of a draft
 | **keeperStatus** | bool | Whether this player is a keeper |
 | **nominatingTeam** | Int | The ID of the nominating team|
 
-### Team
+## Team
 
 This class stores a team that is apart of the league. All variables stored are from the season of the league.
 
@@ -100,7 +100,7 @@ Member functions of the Team class
 | **getWinner** |(String) winner, (bool) isAway | String | A helper function to determine whether the team won or loss their matchup for the given week |
 | **getPlayerName** | (Int) playerId | String | Returns the name of the player given the ID of the player |
 
-### League
+## League
 
 A class representing any given year of a leauge and the teams of that league
 
@@ -121,6 +121,6 @@ A class representing any given year of a leauge and the teams of that league
 | **currentWeek** | Int | The current week of the NFL season |
 | **settings** | Settings | The saved scoring settings of a given league ([See settings](#Settings))|
 
-### EspnRequests
+## EspnRequests
 
-### Settings
+## Settings
