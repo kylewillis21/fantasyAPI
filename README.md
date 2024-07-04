@@ -12,6 +12,7 @@ It will be linked here when it is deployed.
     - [League](#league)
     - [EspnRequests](#espnrequests)
     - [Settings](#settings)
+    - [Matchup](#matchup)
 
 ## Documentation
 
@@ -129,6 +130,7 @@ A class representing any given year of a leauge and the teams of that league
 | *async* **fetchTeams** | (object) Data | None | Updates all of the teams based on the data passed through the function. Typically this data is the one returned from fetchLeague |
 | *async* **fetchDraft** | None | None | Updates the leagues draft with all the picks |
 | *async* **fetchPlayers** | None | None | Maps all of the professional players to their unique IDs |
+| *async* **fetchScoreboard** | (Int) week | Array(Matchup) | Returns all of the matchups of the league in a given week |
 
  
 ## EspnRequests
@@ -143,12 +145,12 @@ A class that allows for all of the needed requests to ESPN to pull data from
 
 | Methods  | Parameters | Return Type | Description |
 | -------- | ---------- | ----------- | ----------- |
-| *async* **#getLeauge** | (String) params, (bool) extend, (String) extension | JSON | The base function to make all requests to the espn server. Never called directly outside of class functions. |
 | *async* **getAll** | None | JSON | Requests a JSON of all the information needed for this API |
 | *async* **getDraft** | None | JSON | Requests a JSON of the draft information from ESPN servers |
 | *async* **getRoster** | None | JSON | Requests a JSON of the roster information for each team |
 | *async* **getPlayer** | None | JSON | Requests a JSON of all the members of the league and their team information |
 | *async* **getProPlayers** | None | JSON | requests a JSON of all the professional players to help for better mapping |
+| *async* **getMatchups** | None | JSON | requests a JSON all league matchups |
 
 ## Settings
 
@@ -172,3 +174,16 @@ The scoring settings for the league along with some other settings for acquisiti
 | **faab** | bool | |
 | **scoringFormat** | Array(Object) | An array of objects containing rules for scoring |
 | **positionSlotCounts** | Object | Contains how many of each position a player can play at a time |
+
+## Matchup
+
+This class represents a single matchup in a given matchup period
+
+| Variables | Type | Description |
+|-----------|------|-------------|
+| **homeTeamId** | Int | The unique identifier of the team that represents the home team in this matchup |
+| **awayTeamId** | Int | The unique identifier of the team that represents the away team in this matchup |
+| **homeScore** | Float | The score put up by the home team in the matchup |
+| **awayScore** | Float | The score put up by the away team in the matchup |
+| **homeTeam** | Team | The team that represents the home team ([See team](#team)) |
+| **awayTeam** | Team | The team that represents the away team ([See team](#team)) |
