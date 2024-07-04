@@ -12,7 +12,6 @@ export class EspnRequests {
   }
 
   async #getLeague(params, extend = false, extension) {
-    // console.log(this.endpoint + params);
     try {
       let response;
       if (extend != false) {
@@ -37,7 +36,9 @@ export class EspnRequests {
 
   async getAll() {
     try {
-      const response = await fetch(this.endpoint + "?view=mTeam&view=mRoster&view=mMatchup&view=mSettings&view=mStandings");
+      const response = await fetch(
+        this.endpoint + "?view=mTeam&view=mRoster&view=mMatchup&view=mSettings&view=mStandings"
+      );
       if (!response.ok) {
         if (response.status === 404) {
           throw new Error("Data not found");
@@ -75,6 +76,11 @@ export class EspnRequests {
 
   async getProPlayers() {
     const data = await this.#getLeague("?view=players_wl", true, "/players");
+    return data;
+  }
+
+  async getMatchups() {
+    const data = await this.#getLeague("?view=mMatchup");
     return data;
   }
 }

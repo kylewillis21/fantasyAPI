@@ -41,7 +41,6 @@ export class Settings {
 
     const scoringItems = data?.scoringSettings?.scoringItems ?? [];
     for (const scoringItem of scoringItems) {
-      console.log(scoringItem);
       const statId = scoringItem.statId;
       const pointsOverride = scoringItem.pointsOverrides?.[16] ?? {};
 

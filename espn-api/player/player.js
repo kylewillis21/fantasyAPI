@@ -6,7 +6,8 @@ export class Player {
     this.name = json_parsing(data, "fullName");
     this.playerId = json_parsing(data, "id");
     this.posRank = json_parsing(data, "positionalRanking");
-    this.eligibleSlots = data?.playerPoolEntry?.player?.eligibleSlots.map((pos) => POSITION_MAP[pos]) ?? [];
+    this.eligibleSlots =
+      data?.playerPoolEntry?.player?.eligibleSlots.map((pos) => POSITION_MAP[pos]) ?? [];
     this.acquisitionType = json_parsing(data, "acquisitionType");
     this.proTeam = PRO_TEAM_MAP[json_parsing(data, "proTeamId")];
     this.injuryStatus = json_parsing(data, "injuryStatus");

@@ -2,6 +2,7 @@ import { EspnRequests } from "../requests.js";
 import { Team } from "../team/team.js";
 import { Pick } from "../pick/pick.js";
 import { Settings } from "../settings/settings.js";
+import { Matchup } from "../matchup/matchup.js";
 
 export class League {
   constructor(leagueId, year) {
@@ -31,6 +32,7 @@ export class League {
   async fetchLeague() {
     const data = await this.requests.getAll(); // Will be represented as a JSON
 
+    this.nflWeek = data.status.latestScoringPeriod;
     this.currentMatchupPeriod = data["status"]["currentMatchupPeriod"];
     this.scoringPeriodId = data["scoringPeriodId"];
     this.firstScoringPeriod = data["status"]["firstScoringPeriod"];
@@ -115,6 +117,33 @@ export class League {
         )
       );
     }
+  }
+
+  async fetchScoreboard(week = 0) {
+    if (!week) {
+      week = this.currentWeek;
+    }
+
+    const data = await this.requests.getMatchups();
+    const schedule = data?.schedule ?? {};
+    const matchups = [];
+    for (const matchup of schedule) {
+      if (matchup.matchupPeriodId == week) {
+        matchups.push(new Matchup(matchup));
+      }
+    }
+
+    for (const team of this.teams) {
+      for (const matchup of matchups) {
+        if (matchup.homeTeamId === team.teamId) {
+          matchup.homeTeam = team;
+        } else if (matchup.awayTeamId === team.teamId) {
+          matchup.awayTeam = team;
+        }
+      }
+    }
+
+    return matchups;
   }
 
   async fetchPlayers() {
