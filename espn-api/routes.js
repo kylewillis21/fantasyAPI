@@ -1,6 +1,7 @@
 import express from "express";
 import { League } from "./league/league.js";
 import { Daotw } from "./daotw/daotw.js";
+import { EspnRequests } from "./requests.js";
 
 const routes = express.Router();
 
@@ -11,8 +12,8 @@ routes.get("/daotw/:leagueId/:year/:week", async (req, res) => {
   const week = parseInt(req.params.week, 10);
   console.log(`recieved the parameters ${leagueId}, ${year}, ${week}`);
 
-  const league = new League(leagueId, year);
-  const data = await league.requests.getDaotw(week);
+  const requests = new EspnRequests(leagueId, year);
+  const data = await requests.getDaotw(week);
 
   const response = new Daotw(data, week);
   res.json(response);

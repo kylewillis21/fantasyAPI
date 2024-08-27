@@ -86,7 +86,7 @@ export class EspnRequests {
 
   async getDaotw(scoringPeriodId) {
     const data = await this.#getLeague(
-      `?scoringPeriodId=${scoringPeriodId}&view=mBoxscore&view=mMatchupScore`
+      `?scoringPeriodId=${scoringPeriodId}&view=mBoxscore&view=mMatchupScore&view=mTeam`
     );
     return data;
   }

@@ -6,7 +6,7 @@ export class Daotw {
     this.matchupPeriodId = matchupPeriodId;
 
     this.fetchTeams(data?.schedule ?? []);
-    this.updateTeamNames();
+    this.updateTeamNames(data?.teams ?? []);
   }
 
   fetchTeams(data) {
@@ -21,5 +21,19 @@ export class Daotw {
     this.teams.sort((a, b) => b.difference - a.difference);
   }
 
-  updateTeamNames() {}
+  updateTeamNames(data) {
+    // Creating a lookup map from the data
+    const teamLookup = {};
+    data.forEach((team) => {
+      teamLookup[team.id] = team.name;
+    });
+
+    // Mapping the names of the teams from the lookup map to the team array
+    this.teams.forEach((team) => {
+      const teamId = team.teamId;
+      if (teamLookup[teamId]) {
+        team.teamName = teamLookup[teamId];
+      }
+    });
+  }
 }
