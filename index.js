@@ -3,12 +3,30 @@ import { Player } from "./espn-api/player/player.js";
 import { Team } from "./espn-api/team/team.js";
 import { Settings } from "./espn-api/settings/settings.js";
 import { EspnRequests } from "./espn-api/requests.js";
-// import data from "./espn-apexample responses/expampleTeam.json" assert { type: "json" };
+import { Daotw } from "./espn-api/daotw/daotw.js";
+import express from "express";
+import router from "./espn-api/routes.js";
 
-const league = new League(946854126, 2023);
-const leagueData = await league.fetchLeague();
-await league.fetchTeams(leagueData);
-await league.fetchPlayers();
-await league.fetchDraft();
-const matchups = await league.fetchScoreboard(17);
-console.log(matchups[1]);
+const app = express();
+const port = 3000;
+
+// Middleware to parse JSON bodies
+app.use(express.json());
+
+// Using the imported routes
+app.use("/api", router);
+
+app.listen(port, () => {
+  console.log(`API is running at http://localhost:${port}`);
+});
+
+// const league = new League(946854126, 2023);
+// const leagueData = await league.fetchLeague();
+// await league.fetchTeams(leagueData);
+// await league.fetchPlayers();
+// await league.fetchDraft();
+// console.log(league);
+
+// const test = await league.requests.getDaotw(3);
+// const daotw = new Daotw(test, 3);
+// console.log(daotw);

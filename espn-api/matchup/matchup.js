@@ -9,6 +9,7 @@ export class Matchup {
     this.awayTeamId = awayTeamId;
     this.awayScore = awayScore;
     this.awayTeam = null;
+    // TODO: Put up the players played in each game on the team
   }
 
   #fetchMatchupInfo(data, team) {

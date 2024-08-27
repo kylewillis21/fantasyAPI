@@ -57,13 +57,11 @@ export class League {
     const teams = data["teams"];
     const schedule = data["schedule"];
     const seasonId = data["seasonId"];
-    const members = data?.members ?? [];
     const teamRoster = {};
     for (const team of data["teams"]) {
       teamRoster[team.id] = team?.roster ?? {};
     }
     for (const team of teams) {
-      const roster = teamRoster[team.id];
       this.teams.push(new Team(team, seasonId, schedule));
     }
     // Sort by team id

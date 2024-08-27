@@ -83,4 +83,11 @@ export class EspnRequests {
     const data = await this.#getLeague("?view=mMatchup");
     return data;
   }
+
+  async getDaotw(scoringPeriodId) {
+    const data = await this.#getLeague(
+      `?scoringPeriodId=${scoringPeriodId}&view=mBoxscore&view=mMatchupScore`
+    );
+    return data;
+  }
 }
