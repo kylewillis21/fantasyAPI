@@ -27,7 +27,7 @@ await league.fetchTeams(leagueData);
 // await league.fetchDraft();
 // console.log(league.teams[0].scores);
 const team = league.teams.find((team) => team.teamId === 1);
-console.log(team.scores);
+// console.log(team.scores);
 
 // const test = await league.requests.getDaotw(3);
 // const daotw = new Daotw(test, 3);

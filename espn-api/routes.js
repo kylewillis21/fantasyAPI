@@ -29,7 +29,7 @@ routes.get("/scores/:leagueId/:year/:teamId", async (req, res) => {
   await league.fetchTeams(leagueData);
 
   const team = league.teams.find((team) => team.teamId === teamId);
-  res.json(team.scores);
+  res.json({ teamName: team.teamName, scores: team.scores });
 });
 
 export default routes;
