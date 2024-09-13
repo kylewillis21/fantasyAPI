@@ -5,6 +5,7 @@ export class DTeam {
     // example of data would be from test.json in schedule.away/home
     this.teamId = data?.teamId ?? 0;
     this.teamName = "";
+    this.logo = "";
     this.actualScore = data?.rosterForCurrentScoringPeriod?.appliedStatTotal ?? 0;
     this.bestScore = 0;
     this.difference = 0;
