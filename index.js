@@ -6,9 +6,21 @@ import { EspnRequests } from "./espn-api/requests.js";
 import { Daotw } from "./espn-api/daotw/daotw.js";
 import express from "express";
 import router from "./espn-api/routes.js";
+import cors from "cors";
 
 const app = express();
 const port = 3000;
+
+const allowedOrigins = ["http://localhost:3001"];
+
+// app.use(
+//   cors({
+//     origin: "*", // Allow frontend origin
+//     methods: "GET,POST,PUT,DELETE", // Allowed methods
+//     allowedHeaders: ["Content-Type"] // Allowed headers
+//   })
+// );
+app.use(cors());
 
 // Middleware to parse JSON bodies
 app.use(express.json());
@@ -20,13 +32,13 @@ app.listen(port, () => {
   console.log(`API is running at http://localhost:${port}`);
 });
 
-const league = new League(946854126, 2023);
-const leagueData = await league.fetchLeague();
-await league.fetchTeams(leagueData);
+// const league = new League(946854126, 2023);
+// const leagueData = await league.fetchLeague();
+// await league.fetchTeams(leagueData);
 // await league.fetchPlayers();
 // await league.fetchDraft();
 // console.log(league.teams[0].scores);
-const team = league.teams.find((team) => team.teamId === 1);
+// const team = league.teams.find((team) => team.teamId === 1);
 // console.log(team.scores);
 
 // const test = await league.requests.getDaotw(3);
