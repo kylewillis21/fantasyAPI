@@ -32,4 +32,15 @@ routes.get("/scores/:leagueId/:year/:teamId", async (req, res) => {
   res.json({ teamName: team.teamName, scores: team.scores });
 });
 
+routes.get("/years/:leagueId", async (req, res) => {
+  const leagueId = parseInt(req.params.leagueId, 10);
+
+  const league = new League(leagueId, 2024); // !TODO: Change it so 2024 is not hardcoded
+  const leagueData = await league.fetchLeague();
+
+  const years = league.previousSeasons;
+  years.push(2024); // !TODO: Change the hardcode here as well
+  res.json({ previousSeasons: years });
+});
+
 export default routes;
