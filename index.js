@@ -31,16 +31,3 @@ app.use("/api", router);
 app.listen(port, () => {
   console.log(`API is running at http://localhost:${port}`);
 });
-
-// const league = new League(946854126, 2023);
-// const leagueData = await league.fetchLeague();
-// await league.fetchTeams(leagueData);
-// await league.fetchPlayers();
-// await league.fetchDraft();
-// console.log(league.teams[0].scores);
-// const team = league.teams.find((team) => team.teamId === 1);
-// console.log(team.scores);
-
-// const test = await league.requests.getDaotw(3);
-// const daotw = new Daotw(test, 3);
-// console.log(daotw);

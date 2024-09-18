@@ -11,7 +11,15 @@
   "author": "Kyle Willis <kylew920@outlook.com>",
   "license": "ISC",
   "dependencies": {
+    "auth0": "^4.10.0",
+    "axios": "^1.7.7",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "firebase": "^10.13.2",
+    "firebase-admin": "^12.5.0",
+    "jwt-decode": "^4.0.0",
+    "mongodb": "^6.9.0",
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {
