@@ -8,39 +8,41 @@ import admin from "firebase-admin";
 
 const routes = express.Router();
 
-// Middleware to get user ID from the Auth0 access token
-const authenticateUser = (req, res, next) => {
-  const authHeader = req.headers.authorization;
-  if (!authHeader) {
-    return res.status(401).json({ error: "No Authorization header" });
-  }
-  const token = authHeader.split(" ")[1];
-  const decodedToken = jwtDecode(token);
-  req.userId = decodedToken.sub;
-  next();
-};
-
-// Save a new league for the user
-routes.post("/leagues", authenticateUser, async (req, res) => {
-  const { leagueId } = req.body;
-  const userId = req.userId;
-
+const saveLeaguesToFirestore = async (userId, leagueIds) => {
   try {
-    // Firestore collection reference
     const userRef = firestore.collection("users").doc(userId);
 
-    // update or create user's leagues
     await userRef.set(
-      {
-        leagues: admin.firestore.FieldValue.arrayUnion(leagueId)
-      },
+      { leagues: admin.firestore.FieldValue.arrayUnion(...leagueIds) },
       { merge: true }
     );
 
-    res.status(200).json({ message: "League saved successfully" });
+    console.log(`Leagues ${leagueIds} saved for user ${userId}`);
+  } catch (error) {
+    console.error("Error saving leagues to Firestore", error);
+    throw new Error("Failed to save league IDs");
+  }
+};
+
+routes.post("/league", async (req, res) => {
+  const { leagueId } = req.body;
+  const token = req.headers.authorization?.split(" ")[1];
+
+  // Check for authentication
+  if (!token || !leagueId) {
+    return res.status(400).json({ message: "Invalid request" });
+  }
+
+  try {
+    const decodedToken = await admin.auth().verifyIdToken(token);
+    const userId = decodedToken.uid;
+
+    await saveLeaguesToFirestore(userId, leagueId);
+
+    res.status(200).json({ message: "Successfully saved league" });
   } catch (error) {
     console.error("Error saving league: ", error);
-    res.status(500).send("Failed to save league");
+    res.status(500).json({ message: "Error saving league" });
   }
 });
 
