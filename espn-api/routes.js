@@ -8,12 +8,19 @@ import admin from "firebase-admin";
 
 const routes = express.Router();
 
-const saveLeaguesToFirestore = async (userId, leagueIds) => {
+const saveLeaguesToFirestore = async (userId, leagueIds, nickname) => {
   try {
     const userRef = firestore.collection("users").doc(userId);
 
+    const leaguesToAdd = leagueIds.map((id, index) => ({
+      leagueId: id,
+      leagueNickname: nickname?.[index] ?? null // optional nickname
+    }));
+
     await userRef.set(
-      { leagues: admin.firestore.FieldValue.arrayUnion(...leagueIds) },
+      {
+        leagues: admin.firestore.FieldValue.arrayUnion(...leaguesToAdd)
+      },
       { merge: true }
     );
 
@@ -25,7 +32,7 @@ const saveLeaguesToFirestore = async (userId, leagueIds) => {
 };
 
 routes.post("/league", async (req, res) => {
-  const { leagueId } = req.body;
+  const { leagueId, nickname } = req.body;
   const token = req.headers.authorization?.split(" ")[1];
 
   // Check for authentication
@@ -37,12 +44,62 @@ routes.post("/league", async (req, res) => {
     const decodedToken = await admin.auth().verifyIdToken(token);
     const userId = decodedToken.uid;
 
-    await saveLeaguesToFirestore(userId, leagueId);
+    const leagueIds = Array.isArray(leagueId) ? leagueId : [leagueId];
+    const nicknames = Array.isArray(nickname) ? nickname : [nickname];
+
+    await saveLeaguesToFirestore(userId, leagueIds, nicknames);
 
     res.status(200).json({ message: "Successfully saved league" });
   } catch (error) {
     console.error("Error saving league: ", error);
     res.status(500).json({ message: "Error saving league" });
+  }
+});
+
+// Need to be able to pull all leagues for a user
+const fetchLeagues = async (userId) => {
+  try {
+    const userRef = firestore.collection("users").doc(userId);
+    const userDoc = await userRef.get();
+
+    if (!userDoc.exists) {
+      console.error(`No user found with ID: ${userId}`);
+      throw new Error("User not found");
+    }
+
+    const userData = userDoc.data();
+    const leagues = userData.leagues || [];
+    console.log(leagues);
+
+    return leagues;
+  } catch (error) {
+    console.error("Failed to fetch leagues: ", error);
+    throw new Error("Failed to fetch leagues");
+  }
+};
+
+routes.get("/league", async (req, res) => {
+  const token = req.headers.authorization?.split(" ")[1];
+
+  // Check for authentication
+  if (!token) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  try {
+    const decodedToken = await admin.auth().verifyIdToken(token);
+    const userId = decodedToken.uid;
+
+    const leagues = await fetchLeagues(userId);
+
+    if (leagues.length === 0) {
+      return res.status(404).json({ message: "Leagues not found" });
+    }
+
+    res.status(200).json({ leagues });
+  } catch (error) {
+    console.error("Error while fetching leagues");
+    res.status(500).json({ error: error });
   }
 });
 
