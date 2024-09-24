@@ -21,16 +21,20 @@ export class EspnRequests {
       }
       if (!response.ok) {
         if (response.status === 404) {
-          throw new Error("Data not found");
+          console.error("Data not found");
+          return null;
         } else if (response.status === 500) {
-          throw new Error("Server error");
+          console.error("Server error");
+          return null;
         } else {
-          throw new Error("Network response was not ok");
+          console.error("Network response was not ok");
+          return null;
         }
       }
       return response.json();
     } catch (err) {
-      throw err;
+      console.error("Error: ", err);
+      return null;
     }
   }
 
@@ -41,16 +45,20 @@ export class EspnRequests {
       );
       if (!response.ok) {
         if (response.status === 404) {
-          throw new Error("Data not found");
+          console.error("Data not found");
+          return null;
         } else if (response.status === 500) {
-          throw new Error("Server error");
+          console.error("Server error");
+          return null;
         } else {
-          throw new Error("Network response was not ok");
+          console.error("Network response was not ok");
+          return null;
         }
       }
       return response.json();
     } catch (err) {
-      throw err;
+      console.error("Error: ", err);
+      return null;
     }
   }
 
