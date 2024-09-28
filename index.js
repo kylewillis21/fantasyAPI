@@ -1,6 +1,7 @@
 import express from "express";
 import https from "https";
 import fs from "fs";
+import cors from "cors";
 
 import router from "./espn-api/routes.js";
 
@@ -12,8 +13,20 @@ app.use(express.json());
 // Using the imported routes
 app.use("/api", router);
 
-const privateKey = fs.readFileSync("./key.pem", "utf8");
-const certificate = fs.readFileSync("./cert.pem", "utf8");
+const allowedOrigins = [
+  "https://fantasy-football-stats.vercel.app/",
+  "http://localhost:3000"
+]
+
+// Cors
+app.use(cors({
+  origin: "*",
+  methods: "GET,POST,PUT,DELETE",
+  credentials: true,
+}));
+
+const privateKey = fs.readFileSync("/etc/letsencrypt/live/api.ffhindsight.com/privkey.pem", "utf8");
+const certificate = fs.readFileSync("/etc/letsencrypt/live/api.ffhindsight.com/fullchain.pem", "utf8");
 
 const credentials = {
   key: privateKey,
