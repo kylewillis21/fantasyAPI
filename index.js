@@ -28,6 +28,9 @@ const corsOptions = {
 // Cors
 app.use(cors(corsOptions));
 
+//preflight
+app.options("*", cors(corsOptions));
+
 const privateKey = fs.readFileSync("/etc/letsencrypt/live/api.ffhindsight.com/privkey.pem", "utf8");
 const certificate = fs.readFileSync(
   "/etc/letsencrypt/live/api.ffhindsight.com/fullchain.pem",
