@@ -13,20 +13,29 @@ app.use(express.json());
 // Using the imported routes
 app.use("/api", router);
 
-const allowedOrigins = [
-  "https://fantasy-football-stats.vercel.app/",
-  "http://localhost:3000"
-]
+const allowedOrigins = ["https://fantasy-football-stats.vercel.app/", "http://localhost:3000"];
 
 // Cors
-app.use(cors({
-  origin: "*",
-  methods: "GET,POST,PUT,DELETE",
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true
+  })
+);
 
 const privateKey = fs.readFileSync("/etc/letsencrypt/live/api.ffhindsight.com/privkey.pem", "utf8");
-const certificate = fs.readFileSync("/etc/letsencrypt/live/api.ffhindsight.com/fullchain.pem", "utf8");
+const certificate = fs.readFileSync(
+  "/etc/letsencrypt/live/api.ffhindsight.com/fullchain.pem",
+  "utf8"
+);
 
 const credentials = {
   key: privateKey,
