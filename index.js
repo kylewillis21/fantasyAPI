@@ -10,8 +10,6 @@ const port = 443;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
-// Using the imported routes
-app.use("/api", router);
 
 const whitelist = ["https://fantasy-football-stats.vercel.app/", "http://localhost:3000"];
 
@@ -30,6 +28,9 @@ app.use(cors(corsOptions));
 
 //preflight
 app.options("*", cors(corsOptions));
+
+// Using the imported routes
+app.use("/api", router);
 
 const privateKey = fs.readFileSync("/etc/letsencrypt/live/api.ffhindsight.com/privkey.pem", "utf8");
 const certificate = fs.readFileSync(
