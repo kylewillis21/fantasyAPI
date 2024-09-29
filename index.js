@@ -11,7 +11,7 @@ const port = 443;
 // Middleware to parse JSON bodies
 app.use(express.json());
 
-const whitelist = ["https://fantasy-football-stats.vercel.app/", "http://localhost:3000"];
+const whitelist = ["https://fantasy-football-stats.vercel.app", "http://localhost:3000"];
 
 const corsOptions = {
   origin: (origin, callback) => {
