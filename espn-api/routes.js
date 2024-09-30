@@ -103,6 +103,18 @@ routes.get("/league", async (req, res) => {
   }
 });
 
+// Function to get all the teams from a league
+routes.get("/teams/:leagueId/:year", async (req, res) => {
+  const leagueId = parseInt(req.params.leagueId, 10);
+  const year = parseInt(req.params.year, 10);
+
+  const league = new League(leagueId, year);
+  const data = await league.fetchLeague();
+  await league.fetchTeams(data);
+
+  res.json(league.teams);
+});
+
 // Route handler for /api/daotw/:leagueId/:year/:week
 routes.get("/daotw/:leagueId/:year/:week", async (req, res) => {
   const leagueId = parseInt(req.params.leagueId, 10);
