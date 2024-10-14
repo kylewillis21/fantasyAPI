@@ -11,7 +11,7 @@ export class DTeam {
     this.difference = 0;
     this.roster = [];
 
-    this.fetchRoster(data.rosterForCurrentScoringPeriod);
+    this.fetchRoster(data?.rosterForCurrentScoringPeriod ?? {});
     this.fetchBestScore();
 
     // the difference between the two scores rounded to the nearest hundredth
