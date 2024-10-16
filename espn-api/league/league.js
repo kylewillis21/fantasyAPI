@@ -1,4 +1,4 @@
-import { EspnRequests } from "../requests.js";
+import { EspnRequests } from "../requests/requests.js";
 import { Team } from "../team/team.js";
 import { Pick } from "../pick/pick.js";
 import { Settings } from "../settings/settings.js";

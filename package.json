@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "node ./espn-api/tests/requests.tests.js",
+    "test": "jest",
     "start": "node index.js"
   },
   "author": "Kyle Willis <kylew920@outlook.com>",
@@ -23,6 +23,8 @@
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.25.8",
+    "babel-jest": "^29.7.0",
     "jest": "^29.7.0"
   }
 }
