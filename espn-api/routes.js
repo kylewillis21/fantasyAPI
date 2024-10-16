@@ -1,7 +1,7 @@
 import express from "express";
 import { League } from "./league/league.js";
 import { Daotw } from "./daotw/daotw.js";
-import { EspnRequests } from "./requests.js";
+import { EspnRequests } from "./requests/requests.js";
 import { firestore } from "../firebase.js";
 import { jwtDecode } from "jwt-decode";
 import admin from "firebase-admin";
