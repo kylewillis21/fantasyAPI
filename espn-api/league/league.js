@@ -6,14 +6,18 @@ import { Matchup } from "../matchup/matchup.js";
 
 export class League {
   constructor(leagueId, year) {
-    this.leagueId = leagueId;
-    this.year = year;
+    this.leagueId = parseInt(leagueId);
+    this.year = parseInt(year);
     this.teams = [];
     this.members = [];
     this.draft = [];
     this.playerMap = {};
 
-    this.requests = new EspnRequests(leagueId, year);
+    if (Number.isNaN(this.leagueId) || Number.isNaN(this.year)) {
+      this.requests = null;
+    } else {
+      this.requests = new EspnRequests(leagueId, year);
+    }
   }
 
   toString() {
